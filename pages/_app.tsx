@@ -1,9 +1,9 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import Header from '../components/Header';
 import { GlobalStyle } from '../styles/global-style';
+import '../styles/globals.css';
 import { theme } from '../styles/theme';
-import Header from './Header';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

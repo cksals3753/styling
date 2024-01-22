@@ -1,9 +1,35 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Container, Wrapper, Banner } from '../styles/index_style';
+import { useState } from 'react';
+import Ball from '../images/ball.jpg';
+import Images2 from '../images/images22.jpeg';
+import Space from '../images/space.jpeg';
+import { Banner, Container, Li, NextBtn, PreBtn, SlideBtn, Slider, SliderIndex, UI, Wrapper } from '../styles/index_style';
 
 const Home: NextPage = () => {
-  
+
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const Images = [
+    Ball,
+    Space,
+    Images2
+  ]
+  const nextSlide = () => {
+    if (activeIndex < Images.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    } else {
+      setActiveIndex(0);
+    }
+  }
+
+  const prevSlide = () => {
+    if (activeIndex > 0) {
+      setActiveIndex(activeIndex - 1);
+    } else {
+      setActiveIndex(Images.length - 1);
+    }
+  }
+
   return (
     <>
       <Head>
@@ -15,6 +41,30 @@ const Home: NextPage = () => {
         <Banner>
           여긴배너
         </Banner>
+        <Slider bgphoto={Images[activeIndex].src}>
+          <SlideBtn>
+            <PreBtn onClick={prevSlide}>
+              prev
+            </PreBtn>
+            <NextBtn onClick={nextSlide}>
+              next
+            </NextBtn>
+          </SlideBtn>
+          <SliderIndex>
+            <UI>
+              {Images.map((_data, index) => {
+                return (
+                  <Li
+                    key={index}
+                    onClick={() => setActiveIndex(index)}
+                    match={Number(index) === activeIndex ? "#F7F7F7" : "#6B645D"}
+                  >
+                  </Li>
+                );
+              })}
+            </UI>
+          </SliderIndex>
+        </Slider>
         <Wrapper>
         </Wrapper>
       </Container>
